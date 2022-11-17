@@ -9,7 +9,7 @@ include("database.php");
 if (isset($_POST['signup']))       signup();
 if (isset($_POST['save']))        saveProduct();
 // if (isset($_POST['update']))      updateTask();
-// if (isset($_POST['delete']))      deleteTask();
+if (isset($_GET['id']))      deleteTask();
 
 
 
@@ -24,16 +24,18 @@ function display()
     global $connc;
     $requete = "SELECT * FROM products ";
     $query = mysqli_query($connc, $requete); 
-    
+    //<img height="270px" src="'.$row["img"].'" class="card-img-top"  alt="...">
     // return  $query;
     while ($row = mysqli_fetch_assoc($query)) {
                 $id = $row['id'];
                 echo '
                                     <div class="col-lg-3 col-md-6 mb-3">
-                                        <div class="card " >
-                                            <img height="270px" src="'.$row["img"].'" class="card-img-top"  alt="...">
+                                        <div class="card " tt=' . $row['id'] . '>
+                                            <div style="height: 300px; background-position: center; background-size: cover; background-repeat: no-repeat; background-image: url('.$row["img"].'); ">
+                                            
+                                            </div>
                                             <div class="card-body">
-                                                <h5 class="card-title" id="name' . $id . '" data="' . $row['name'] . '">'.$row["name"].'</h5>
+                                                <h5 class="card-title text-truncate" title="'.$row["name"].'" id="name' . $id . '">'.$row["name"].'</h5>
                                                 <p class="card-text" id="description' . $id . '" desc="' . $row['description'] . '">'.substr($row['description'],0,10).'</p>
                                             </div>
                                             <ul class="list-group list-group-flush">
@@ -42,7 +44,7 @@ function display()
                                             </ul>
                                             <div class="card-body">
                                                 <button type="submit" name="update" class="btn btn-warning " id="task-update-btn" onclick="edit(' . $id . ')">Update</button>
-                                                <button type="submit" name="delete" class="btn btn-danger " id="task-delete-btn">Delete</button>
+                                                <a href="scripts.php?id='.$row['id'] .'" type="submit" name="delete" class="btn btn-danger " id="task-delete-btn">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -96,11 +98,29 @@ function updateTask()
     $pdt_description = $_POST['description'];
     $pdt_img=$_POST['img_upload'];
     //CODE HERE
-
+    //SQL UPDATE
     $upd = "UPDATE  `products` SET  `name`='$pdt_name',`price`='$pdt_price',`quantity`='$pdt_quantity',`description`='".$pdt_description."',`img`='$pdt_img', WHERE id = '$id'";
     mysqli_query($connc, $upd);
-    //SQL UPDATE
+    
     $_SESSION['message'] = "Task has been updated successfully !";
+    header('location: home.php');
+}
+
+
+
+
+function deleteTask()
+{
+    //CODE HERE
+    if (isset($_GET['id'])) {
+        $ID = $_GET['id'];
+        echo $ID;
+    }
+    global $connc;
+    $del = "DELETE FROM products where id='$ID'";
+    $query = mysqli_query($connc, $del);
+    
+    $_SESSION['message'] = "Task has been deleted successfully !";
     header('location: home.php');
 }
 

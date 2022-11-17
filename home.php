@@ -81,12 +81,16 @@ if(!isset($_SESSION['name'])){
                   </ul>
                 </li>
               </ul>
-              <div onclick="addbtn()">
-                    <a href="#modal-task" data-bs-toggle="modal" class="btn btn-seccondery main-btn rounded-3"><i class="bi bi-plus-lg me-2"></i>Add Instruments</a>
-              </div>
+              
             </div>
           </div>
         </nav>
+        <div class="text-end ">
+          <a  onclick="addbtn()" >
+                    <a href="#modal-task" data-bs-toggle="modal" class="btn btn-light main-btn rounded-3 mt-5 me-5"><i class="bi bi-plus-lg me-2"></i>Add Instruments</a>
+              </a>
+        </div>
+              
         <!-- ------------------------------------------------------------- -->
         <!-- -----------------------end of navbar----------------------- -->
 
@@ -99,7 +103,7 @@ if(!isset($_SESSION['name'])){
                     
                       <div class="row w-100">
                         <?php
-                        $data = display();
+                        display();
                         ?>
                       </div>
                     
