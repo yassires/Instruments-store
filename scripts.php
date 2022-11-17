@@ -120,7 +120,7 @@ function deleteTask()
     $del = "DELETE FROM products where id='$ID'";
     $query = mysqli_query($connc, $del);
     
-    $_SESSION['message'] = "Task has been deleted successfully !";
+    $_SESSION['message'] = "Task has been deleted successfully ";
     header('location: home.php');
 }
 
