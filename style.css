@@ -1,0 +1,46 @@
+body{
+    font-family: "roboto",sans-serif;
+}
+
+/* Start Navbar */
+.navbar{
+    background-color: rgb(185, 185, 185);
+    width: 100%;
+}
+.navbar .navbar-nav .nav-link:focus,
+.navbar .navbar-nav .nav-link:hover{
+    color: aliceblue;
+}
+.navbar .search{
+    border-left: 1px solid black;
+}
+.navbar .search svg{
+    color: black;
+}
+.navbar .search:focus,
+.navbar .search:hover{
+    color: aliceblue;
+}
+/* End Navbar */
+#pic{
+    background-color: grey;
+    background-blend-mode: multiply;
+    padding: 15%;
+}
+
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
