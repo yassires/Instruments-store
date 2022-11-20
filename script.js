@@ -42,10 +42,12 @@ function edit(id){
     document.getElementById("pdt-delete-btn").style.display="block";
     document.getElementById("pdt-update-btn").style.display="block";
     document.getElementById("pdt-save-btn").style.display="none";
-    document.getElementById("pdt-title").value=document.getElementById("name"+id).getAttribute('data');
+    document.getElementById("pdt-title").value=document.getElementById("name"+id).getAttribute('title');
     document.getElementById("pdt-description").value = document.getElementById("description"+id).getAttribute('desc');
     document.getElementById("pdt-price").value = document.getElementById("price"+id).getAttribute('price_pdt');
     document.getElementById("pdt-quantity").value = document.getElementById("quantity"+id).getAttribute('quantity_pdt');
+
+    console.log(document.getElementById("name"+id).getAttribute('id'));
     }
 
 
@@ -57,3 +59,9 @@ function addbtn(){
     document.getElementById("form-task").reset();
     
     }
+
+
+
+
+
+    

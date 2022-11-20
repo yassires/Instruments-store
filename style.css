@@ -4,12 +4,11 @@ body{
 
 /* Start Navbar */
 .navbar{
-    background-color: rgb(185, 185, 185);
     width: 100%;
 }
 .navbar .navbar-nav .nav-link:focus,
 .navbar .navbar-nav .nav-link:hover{
-    color: aliceblue;
+    color: rgb(9, 100, 180);
 }
 .navbar .search{
     border-left: 1px solid black;
@@ -19,14 +18,31 @@ body{
 }
 .navbar .search:focus,
 .navbar .search:hover{
-    color: aliceblue;
+    color: rgb(14, 86, 150);
 }
 /* End Navbar */
-#pic{
-    background-color: grey;
-    background-blend-mode: multiply;
-    padding: 15%;
+
+
+.welcomepg{
+
+    height: 300px;
+    width: 100%;
+    display: flex;
+    padding: 100px;
+    flex-direction: column;
+    align-items: center;
+
 }
+
+
+
+
+#us{
+    margin-top: 150px;
+}
+
+
+
 
 
 

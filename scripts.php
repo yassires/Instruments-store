@@ -8,8 +8,8 @@ include("database.php");
 //ROUTING
 if (isset($_POST['signup']))       signup();
 if (isset($_POST['save']))        saveProduct();
-// if (isset($_POST['update']))      updateTask();
-if (isset($_GET['id']))      deleteTask();
+if (isset($_POST['update']))      updateTask();
+if (isset($_POST['delete']))           deleteTask();
 
 
 
@@ -29,22 +29,21 @@ function display()
     while ($row = mysqli_fetch_assoc($query)) {
                 $id = $row['id'];
                 echo '
-                                    <div class="col-lg-3 col-md-6 mb-3">
+                                    <div class="col-lg-3 col-md-6  mt-3">
                                         <div class="card " tt=' . $row['id'] . '>
                                             <div style="height: 300px; background-position: center; background-size: cover; background-repeat: no-repeat; background-image: url('.$row["img"].'); ">
                                             
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="card-title text-truncate" title="'.$row["name"].'" id="name' . $id . '">'.$row["name"].'</h5>
-                                                <p class="card-text" id="description' . $id . '" desc="' . $row['description'] . '">'.substr($row['description'],0,10).'</p>
+                                                <h5 class="card-title text-truncate" title="'.$row['name'].'" id="name' . $id . '">'.$row["name"].'</h5>
+                                                <p class="card-text" id="description'.$id.'" desc="' . $row['description'] . '">'.substr($row['description'],0,10).'</p>
                                             </div>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item" id="price' . $id . '" price_pdt="' . $row['price'] . '"> Price : '.$row["price"].'</li>
                                                 <li class="list-group-item" id="quantity' . $id . '" quantity_pdt="' . $row['quantity'] . '"> Quantity : '.$row["quantity"].'</li>
                                             </ul>
-                                            <div class="card-body">
-                                                <button type="submit" name="update" class="btn btn-warning " id="task-update-btn" onclick="edit(' . $id . ')">Update</button>
-                                                <a href="scripts.php?id='.$row['id'] .'" type="submit" name="delete" class="btn btn-danger " id="task-delete-btn">Delete</a>
+                                            <div class="card-body" >
+                                            <button   type="submit" name="details" href="#modal-task" data-bs-toggle="modal" onclick="edit(' . $id . ')" class="btn btn-primary rounded-3 col-12 fs-4">Details</button>
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +95,7 @@ function updateTask()
     $pdt_price = $_POST['price'];
     $pdt_quantity = $_POST['quantity'];
     $pdt_description = $_POST['description'];
-    $pdt_img=$_POST['img_upload'];
+    // $pdt_img=$_POST['img_upload'];
     //CODE HERE
     //SQL UPDATE
     $upd = "UPDATE  `products` SET  `name`='$pdt_name',`price`='$pdt_price',`quantity`='$pdt_quantity',`description`='".$pdt_description."',`img`='$pdt_img', WHERE id = '$id'";
@@ -112,16 +111,39 @@ function updateTask()
 function deleteTask()
 {
     //CODE HERE
-    if (isset($_GET['id'])) {
-        $ID = $_GET['id'];
-        echo $ID;
-    }
+    $id = $_POST['index'];
     global $connc;
-    $del = "DELETE FROM products where id='$ID'";
+    $del = "DELETE FROM products where id='$id'";
     $query = mysqli_query($connc, $del);
     
     $_SESSION['message'] = "Task has been deleted successfully ";
     header('location: home.php');
+}
+
+
+
+
+
+
+function user_count(){
+    global $connc;
+    $requete= "SELECT COUNT(*) as 'ct' FROM users";
+    $query = mysqli_query($connc, $requete);
+    while($user_count = mysqli_fetch_assoc($query)){
+        echo $user_count['ct'];
+    };
+    
+}
+
+
+function pdt_count(){
+    global $connc;
+    $requete= "SELECT COUNT(*) as 'ct' FROM products";
+    $query = mysqli_query($connc, $requete);
+    while($pdt_count = mysqli_fetch_assoc($query)){
+        echo $pdt_count['ct'];
+    };
+
 }
 
     
@@ -248,3 +270,6 @@ if(isset($_POST['logout'])){
 // log out-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // log out-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // log out-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
