@@ -12,11 +12,12 @@ form.addEventListener("submit", (e) => {
     if (email.value === "" || email.value == null) {
         index++;
         email.classList.add("is-invalid");
-        errorEmail.innerHTML = "Adress email is required to create your account.";
+        errorEmail.innerHTML = "Adress email is required to sign into your account.";
     } else {
         email.classList.remove("is-invalid");
-        email.classList.add("is-valid");
         errorEmail.innerHTML = "Looks Good !";
+        email.classList.add("is-valid");
+        
     }
 
     if (password.value === "" || password.value == null) {

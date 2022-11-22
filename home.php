@@ -157,7 +157,7 @@ if (!isset($_SESSION['name'])) {
                   </div>
 
                   <div class="d-flex ">
-                    <p class="display-4 align-self-end"><?php pdt_count() ?></p>
+                    <p class="display-4 align-self-end"><?php capital() ?></p>
                   </div>
                 </div>
               </div>
@@ -175,7 +175,24 @@ if (!isset($_SESSION['name'])) {
   <!-- -----------------------------begin of the cards----------------------------------- -->
   <!-- ---------------------------------------------------------------------- -->
   <div class="container-fluid mt-5 border border-primary bg-dark bg-opacity-25">
-        
+
+                  <?php
+                if (isset($_SESSION["update"])) : ?>
+
+                    <div class="alert alert-success alert-bs-dismissible fade show d-flex justify-content-between" role="alert">
+                      <div>
+                      <strong>Well done!</strong> <?php
+                      echo $_SESSION['update'];
+                      unset($_SESSION['update']);
+                        ?>
+                      </div>
+                      <button type="button" class="close bg-transparent border-0" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  <?php endif?>
+
+
         <div class="text-end ">
           <a onclick="addbtn()">
             <button href="#modal-task" data-bs-toggle="modal" class="btn btn-light main-btn rounded-3 mt-5 me-5"><i class="bi bi-plus-lg me-2"></i>Add Instruments</button>
@@ -215,7 +232,6 @@ if (!isset($_SESSION['name'])) {
             
               
               <div class="mb-3">
-              <label for="formFile" class="form-label">Default file input example</label>
               <input class="form-control" type="file" name="img_upload">
             </div>
 
@@ -257,10 +273,12 @@ if (!isset($_SESSION['name'])) {
 
 
   <!-- ================== BEGIN core-css ================== -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
   <script defer src="/your_path_to_version_6_files/js/fontawesome.js"></script>
-  <!-- ================== END core-css ================== -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
   <script src="script.js"></script>
+  <!-- ================== END core-css ================== -->
+  
 
 </body>
 

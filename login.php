@@ -53,6 +53,7 @@ include('scripts.php');
         <div class="col-lg-6 mb-5 mb-lg-0 ">
           <div class="card">
             <div class="card-body px-4 py-5 px-md-5">
+             
               <form id="login"  method="POST">
                     <div>
                         <div class="d-flex  justify-content-center">
@@ -74,7 +75,22 @@ include('scripts.php');
                   <label class="form-label" for="form3Example4">Password</label>
                   <div id="errorPassword" class="form-text text-start"></div>
                 </div>
-  
+                
+                <?php
+
+                   if (isset($_SESSION["shit"])) : ?>
+                   
+                     <div class="alert alert-danger" role="alert">
+                      
+                          <?php
+                          echo $_SESSION['shit'];
+                          unset($_SESSION['shit']);
+                           ?>
+                     </div>
+                     <?php endif?>
+                   
+                
+                  
                 <!-- Submit button -->
                 <button type="submit" name="login" class="btn btn-primary btn-block mb-4">
                   Log in

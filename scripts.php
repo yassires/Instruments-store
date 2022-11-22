@@ -95,13 +95,16 @@ function updateTask()
     $pdt_price = $_POST['price'];
     $pdt_quantity = $_POST['quantity'];
     $pdt_description = $_POST['description'];
-    // $pdt_img=$_POST['img_upload'];
+    $img_name=$_FILES['img_upload']['name'];
+    $tmp_img_name=$_FILES['img_upload']['tmp_name'];
+    $folder='image_uploaded/'.$img_name;
+    move_uploaded_file($tmp_img_name,$folder);
     //CODE HERE
     //SQL UPDATE
-    $upd = "UPDATE  `products` SET  `name`='$pdt_name',`price`='$pdt_price',`quantity`='$pdt_quantity',`description`='".$pdt_description."',`img`='$pdt_img', WHERE id = '$id'";
+    $upd = "UPDATE  `products` SET  `name`='$pdt_name',`price`='$pdt_price',`quantity`='$pdt_quantity',`description`='$pdt_description',`img`='$folder'  WHERE id = $id ";
     mysqli_query($connc, $upd);
     
-    $_SESSION['message'] = "Task has been updated successfully !";
+    $_SESSION['update'] = "instrument has been updated successfully !";
     header('location: home.php');
 }
 
@@ -142,8 +145,26 @@ function pdt_count(){
     $query = mysqli_query($connc, $requete);
     while($pdt_count = mysqli_fetch_assoc($query)){
         echo $pdt_count['ct'];
-    };
+    }
 
+}
+
+
+
+function capital(){
+    
+ 
+    global $connc;
+    $capital=0;
+    $requete = "SELECT * FROM products";
+    $query = mysqli_query($connc, $requete);
+    while($row = mysqli_fetch_assoc($query)){
+    $capital+=$row['price'] * $row['quantity'];
+ 
+    
+    }  
+    
+    echo $capital;
 }
 
     
@@ -175,8 +196,6 @@ function signup()
     //          VALUES ('$name','$email','$password')";
     // mysqli_query($connc, $requete);
     //SQL INSERT
-    $_SESSION['message'] = "Task has been added successfully !";
-
     //Form validation
     if(empty($name) || empty($email) || empty($password) || empty($confirm_password)) {
         $_SESSION['message1'] = "Please fill all required fields!!";
@@ -223,7 +242,6 @@ if(isset($_POST['login']))
     $email=$_POST['email'];
     $password=$_POST['password'];
     
-   
 
     $sql = "SELECT * FROM users WHERE email='$email' && password='$password'";
     $result = mysqli_query($connc,$sql);
@@ -232,18 +250,25 @@ if(isset($_POST['login']))
         $_SESSION['name']=$row['name'];
         $_SESSION['id']=$row['id'];
         header("Location:home.php");
+        
     }
-    
     else
     {
-    echo "incorrect inputs";
+    $_SESSION['shit'] = 'check your information';
     header("Location:login.php");
+    die();
+    // $_SESSION['shit'] = 'check your information';
     }
 
 }
 // login-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // login-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // login-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 
 
