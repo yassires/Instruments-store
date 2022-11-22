@@ -1,7 +1,8 @@
 <?php
 //INCLUDE DATABASE FILE
-session_start();
 include("database.php");
+
+
 //SESSSION IS A WAY TO STORE DATA TO BE USED ACROSS MULTIPLE PAGES
 // session_start();
 
@@ -29,17 +30,18 @@ function display()
     while ($row = mysqli_fetch_assoc($query)) {
                 $id = $row['id'];
                 echo '
-                                    <div class="col-lg-3 col-md-6  mt-3">
-                                        <div class="card " tt=' . $row['id'] . '>
+             
+                                    <div class=" col-sm-12 col-md-6 col-lg-3   mt-3">
+                                        <div class="card" tt=' . $row['id'] . '>
                                             <div style="height: 300px; background-position: center; background-size: cover; background-repeat: no-repeat; background-image: url('.$row["img"].'); ">
                                             
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title text-truncate" title="'.$row['name'].'" id="name' . $id . '">'.$row["name"].'</h5>
-                                                <p class="card-text" id="description'.$id.'" desc="' . $row['description'] . '">'.substr($row['description'],0,10).'</p>
+                                                <p class="card-text text-truncate" id="description'.$id.'" desc="' . $row['description'] . '">'.$row['description'].'</p>
                                             </div>
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item" id="price' . $id . '" price_pdt="' . $row['price'] . '"> Price : '.$row["price"].'</li>
+                                                <li class="list-group-item" id="price' . $id . '" price_pdt="' . $row['price'] . '"> Price : '.$row["price"].' $</li>
                                                 <li class="list-group-item" id="quantity' . $id . '" quantity_pdt="' . $row['quantity'] . '"> Quantity : '.$row["quantity"].'</li>
                                             </ul>
                                             <div class="card-body" >
@@ -47,6 +49,7 @@ function display()
                                             </div>
                                         </div>
                                     </div>
+     
                          ';
     }
     //SQL SELECT
@@ -98,14 +101,28 @@ function updateTask()
     $img_name=$_FILES['img_upload']['name'];
     $tmp_img_name=$_FILES['img_upload']['tmp_name'];
     $folder='image_uploaded/'.$img_name;
-    move_uploaded_file($tmp_img_name,$folder);
+    
     //CODE HERE
-    //SQL UPDATE
-    $upd = "UPDATE  `products` SET  `name`='$pdt_name',`price`='$pdt_price',`quantity`='$pdt_quantity',`description`='$pdt_description',`img`='$folder'  WHERE id = $id ";
+    if($tmp_img_name==""){
+        //SQL UPDATE
+    $upd = "UPDATE  `products` SET  `name`='$pdt_name',`price`='$pdt_price',`quantity`='$pdt_quantity',`description`='$pdt_description'  WHERE id = $id ";
     mysqli_query($connc, $upd);
     
     $_SESSION['update'] = "instrument has been updated successfully !";
     header('location: home.php');
+    }else{
+        $img_name=$_FILES['img_upload']['name'];
+        $tmp_img_name=$_FILES['img_upload']['tmp_name'];
+        $folder='image_uploaded/'.$img_name;
+        move_uploaded_file($tmp_img_name,$folder);
+            //SQL UPDATE
+            $upd = "UPDATE  `products` SET  `name`='$pdt_name',`price`='$pdt_price',`quantity`='$pdt_quantity',`description`='$pdt_description',`img`='$folder'  WHERE id = $id ";
+            mysqli_query($connc, $upd);
+
+            $_SESSION['update'] = "instrument has been updated successfully !";
+            header('location: home.php');
+    }
+    
 }
 
 

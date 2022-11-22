@@ -97,6 +97,9 @@ include('scripts.php');
                     Sign up
                   </button>
                 </form>
+                <div class="mt-2">
+                    <p>You alraedy have an account? <a class="text-decoration-none" href="login.php">Login</a></p>
+                </div>
               </div>
             </div>
           </div>

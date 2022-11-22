@@ -1,5 +1,6 @@
 <?php
 include('scripts.php');
+session_start();
 if (!isset($_SESSION['name'])) {
   header('Location:login.php');
 }
@@ -101,7 +102,7 @@ if (!isset($_SESSION['name'])) {
 
   <!-- -----------------------welcome page-------------------------- -->
   <!-- -----------------------welcome page-------------------------- -->
-  <div class="welcomepg d-flex justify-content-center" style="background-color: rgba(0, 0, 0,0.30);">
+  <div class="welcomepg " style="background-color: rgba(0, 0, 0,0.30);">
     <p class="text-white fs-2">Welcome Admin</p>
     <div class="">
       <h4 class="text-white  text-center fw-bold"><?php
@@ -115,16 +116,16 @@ if (!isset($_SESSION['name'])) {
   <!-- -----------------------welcome page-------------------------- -->
 
 
-<div class="border border-primary bg-dark bg-opacity-25" id="us">
+<div class=" bg-dark bg-opacity-25" id="us">
     <div class="text-white mt-3 d-flex mb-4">
       <i class="bi bi-graph-up-arrow fs-4 me-3 ms-2"></i>
        <h3>Statistics</h3>
     </div>
      
-      <div class="container-fluid">
-          <section class="my-5">
-            <div class="row gap-5 justify-content-center">
-              <div class="card  col-lg-3 col-md-6 ">
+      <div class="container-fluid ">
+          <section class="my-5 ">
+            <div class="row gap-5 justify-content-center ">
+              <div class="card  col-lg-3 col-md-4 mb-3">
                 <div class="card-body pb-0">
                   <div class="d-flex ">
                     <i class="bi bi-people fs-1"></i>
@@ -137,7 +138,7 @@ if (!isset($_SESSION['name'])) {
                 </div>
               </div>
 
-              <div class="card  col-lg-3 col-md-6">
+              <div class="card  col-lg-3 col-md-4 mb-3">
                 <div class="card-body pb-0">
                   <div class="d-flex ">
                     <i class="bi bi-box-seam fs-1"></i>
@@ -149,7 +150,7 @@ if (!isset($_SESSION['name'])) {
                   </div>
                 </div>
               </div>
-              <div class="card  col-lg-3 col-md-6">
+              <div class="card  col-lg-3 col-md-4 mb-3">
                 <div class="card-body pb-0">
                   <div class="d-flex ">
                     <i class="bi bi-currency-dollar fs-1"></i>
@@ -162,11 +163,12 @@ if (!isset($_SESSION['name'])) {
                 </div>
               </div>
             </div>
-</div>
+          </section>
+      </div>
   
 
 
-    </section>
+    
   </div>
 
 
@@ -174,7 +176,7 @@ if (!isset($_SESSION['name'])) {
 
   <!-- -----------------------------begin of the cards----------------------------------- -->
   <!-- ---------------------------------------------------------------------- -->
-  <div class="container-fluid mt-5 border border-primary bg-dark bg-opacity-25">
+  <div class="container-fluid mt-5  bg-dark bg-opacity-25">
 
                   <?php
                 if (isset($_SESSION["update"])) : ?>
@@ -195,18 +197,20 @@ if (!isset($_SESSION['name'])) {
 
         <div class="text-end ">
           <a onclick="addbtn()">
-            <button href="#modal-task" data-bs-toggle="modal" class="btn btn-light main-btn rounded-3 mt-5 me-5"><i class="bi bi-plus-lg me-2"></i>Add Instruments</button>
+            <button href="#modal-task" data-bs-toggle="modal" class="btn btn-light main-btn rounded-3 mt-5 "><i class="bi bi-plus-lg "></i>Add Instruments</button>
           </a>
         </div>
         <div class="text-white mt-3 d-flex mb-4">
-        <i class="bi bi-box-seam fs-4 "></i>
+        <i class="bi bi-box-seam fs-4 me-3"></i>
           <h3>Products :</h3>
         </div>
-    <div class="row  col-sm-12">
+        
+    <div class=" row ">
       <?php
       display();
       ?>
     </div>
+                
 
   </div>
   <!-- -----------------------------end of thecards----------------------------------- -->
