@@ -1,6 +1,5 @@
 <?php
 include('scripts.php');
-session_start();
 if (!isset($_SESSION['name'])) {
   header('Location:login.php');
 }
@@ -48,9 +47,15 @@ if (!isset($_SESSION['name'])) {
 
   <nav class="navbar navbar-expand-lg   sticky-top navbar-dark bg-dark">
     <div class="container-fluid">
-      <a href="#" class="navbar-brand mb-0 ">
-        <img src="logocl.png" width="50px" alt="logo">
-        Instruments Store
+      <a href="home.php" class="navbar-brand mb-0 ">
+        <div class="d-flex">
+           <img src="logocl.png" width="50px" alt="logo">
+        <span class="d-none d-md-block d-lg-block">
+          Instruments Store
+        </span>
+        </div>
+       
+        
       </a>
 
       <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +64,7 @@ if (!isset($_SESSION['name'])) {
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item active">
-            <a href="#" class="nav-link p-lg-3 active">
+            <a href="home.php" class="nav-link p-lg-3 active">
               Home
             </a>
           </li>
@@ -74,8 +79,7 @@ if (!isset($_SESSION['name'])) {
               ?>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end " aria-labelledby="navbarDropdown">
-              <li><a href="1" class="dropdown-item">Edit Profil</a></li>
-              <li><a href="2" class="dropdown-item">Item2</a></li>
+              <li><a href="profil.php" class="dropdown-item">Edit Profil</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

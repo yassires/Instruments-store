@@ -1,6 +1,7 @@
 <?php
 //INCLUDE DATABASE FILE
 include("database.php");
+session_start();
 
 
 //SESSSION IS A WAY TO STORE DATA TO BE USED ACROSS MULTIPLE PAGES
@@ -10,7 +11,9 @@ include("database.php");
 if (isset($_POST['signup']))       signup();
 if (isset($_POST['save']))        saveProduct();
 if (isset($_POST['update']))      updateTask();
-if (isset($_POST['delete']))           deleteTask();
+if (isset($_POST['delete']))        deleteTask();
+if (isset($_POST['p_submit']))        updateprofil();
+
 
 
 
@@ -314,4 +317,22 @@ if(isset($_POST['logout'])){
 // log out-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+// profil edit
+// profil edit
 
+function updateprofil()
+{
+    require 'database.php';
+    $usr_pname = $_SESSION['name'];
+    $usr_email = $_POST['p_email'];
+    $usr_password = $_POST['p_password'];
+            //SQL UPDATE
+            $upd = "UPDATE  `users` SET  `email`='$usr_email', `password`='$usr_password' where `users`.`name` = '$usr_pname'";
+            mysqli_query($connc, $upd);
+            header('location: home.php');
+}
+
+
+
+// profil edit
+// profil edit

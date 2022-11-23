@@ -13,7 +13,7 @@ if (!isset($_SESSION['name'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instruments Store-profil</title>
+  <title>Instruments Store</title>
 
 
   <!-- ================== BEGIN core-css ================== -->
@@ -32,7 +32,8 @@ if (!isset($_SESSION['name'])) {
   <style>
     body {
       background-image: url('Untitled.jpg');
-      background-color: grey;
+      background-color: rgb(58, 58, 58);
+
       background-blend-mode: multiply;
 
 
@@ -45,11 +46,17 @@ if (!isset($_SESSION['name'])) {
   <!-- -----------------------begin of navbar----------------------- -->
   <!-- ------------------------------------------------------------- -->
 
-  <nav class="navbar navbar-expand-lg   sticky-top navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg   sticky-top navbar-dark bg-dark mb-5">
     <div class="container-fluid">
-      <a href="#" class="navbar-brand mb-0 ">
-        <img src="logocl.png" width="50px" alt="logo">
-        Instruments Store
+      <a href="home.php" class="navbar-brand mb-0 ">
+        <div class="d-flex">
+           <img src="logocl.png" width="50px" alt="logo">
+        <span class="d-none d-md-block d-lg-block">
+          Instruments Store
+        </span>
+        </div>
+       
+        
       </a>
 
       <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,12 +65,33 @@ if (!isset($_SESSION['name'])) {
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item active">
-            <a href="#" class="nav-link p-lg-3 active">
+            <a href="home.php" class="nav-link p-lg-3 active">
               Home
             </a>
           </li>
 
-          
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link
+                              dropdown-toggle p-lg-3" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <?php
+              print_r($_SESSION['name']);
+              print_r($_SESSION['id']);
+
+              ?>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end " aria-labelledby="navbarDropdown">
+              <li><a href="" class="dropdown-item">Edit Profil</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <form method="POST" class="ps-4">
+                <button class="btn btn-danger main-btn rounded-3 ms-3" type="submit" name="logout">
+                  Log out
+                </button>
+              </form>
+
+            </ul>
+          </li>
         </ul>
 
       </div>
@@ -81,62 +109,72 @@ if (!isset($_SESSION['name'])) {
 
 
 
-  <!-- -----------------------------begin of the cards----------------------------------- -->
-  <!-- ---------------------------------------------------------------------- -->
-  <div class="container-fluid mt-5  bg-dark bg-opacity-25">
+  <!-- -----------------------profil edit-------------------------- -->
+  <!-- -----------------------profil edit-------------------------- -->
 
-                  <?php
-                if (isset($_SESSION["update"])) : ?>
-
-                    <div class="alert alert-success alert-bs-dismissible fade show d-flex justify-content-between" role="alert">
-                      <div>
-                      <strong>Well done!</strong> <?php
-                      echo $_SESSION['update'];
-                      unset($_SESSION['update']);
-                        ?>
-                      </div>
-                      <button type="button" class="close bg-transparent border-0" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                  <?php endif?>
-
-
-        
-        <div class="text-white mt-3 d-flex mb-4">
-        <i class="bi bi-box-seam fs-4 me-3"></i>
-          <h3>Products :</h3>
-        </div>
-        
-    <div class=" row ">
-    <div class=" col-sm-12 col-md-6 col-lg-3   mt-3">
-                                        <div class="card">
-                                            <div style="height: 300px; background-position: center; background-size: cover; background-repeat: no-repeat; background-image: url()">
-                                            
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title text-truncate" >guitar</h5>
-                                                <p class="card-text" >guitar</p>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item" > Price : 10 $</li>
-                                                <li class="list-group-item" > Quantity : 15</li>
-                                            </ul>
-                                            
-                                        </div>
-                                    </div>
-    </div>
-                
-
-  </div>
-  <!-- -----------------------------end of thecards----------------------------------- -->
-  <!-- ---------------------------------------------------------------------- -->
-
-
-
+  <!-- Section: Design Block -->
 
 
   
+<div class="container   text-center   ">
+  <div class="row  justify-content-center ">
+
+    <div class="col-lg-12 col-md-12 mb-5 mb-lg-0 ">
+      <div class="card">
+        <div class="card-body px-4 py-5 px-md-5">
+         
+          <form id="login"  method="POST">
+                <div>
+                    <h4 class="fw-normal mb-3 pb-3 mt-5" >Profil Edit</h4>
+                </div>
+            <!-- name input -->
+            <div class="form-outline mb-4 mt-5" >
+              <input type="text"   name = "pname" class="form-control" placeholder="<?php
+              print_r($_SESSION['name']);?>" disabled/>
+              
+              <label class="form-label" for="form3Example3">Username</label>
+              <div id="errorEmail" class="form-text text-start"></div>
+            </div>
+            <!-- Email input -->
+            <div class="form-outline mb-4 mt-5">
+              <input type="email" name="p_email" class="form-control" />
+              <label class="form-label" for="form3Example3">Email address</label>
+              <div id="errorEmail" class="form-text text-start"></div>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4 mt-5">
+              <input type="password"  name="p_password" class="form-control" />
+              <label class="form-label" for="form3Example4">Password</label>
+              <div id="errorPassword" class="form-text text-start"></div>
+            </div>
+            
+            
+            
+              
+            <!-- Submit button -->
+            <button type="submit" name="p_submit" class="btn btn-primary mb-4 mt-5 mx-5">Submit</button>
+            
+           
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Section: Design Block -->
+       
+</form>
+</div>
+
+
+
+
+
+
+  <!-- -----------------------profil edit-------------------------- -->
+  <!-- -----------------------profil edit-------------------------- -->
 
 
 
